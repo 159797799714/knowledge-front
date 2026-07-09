@@ -1,0 +1,144 @@
+@import '../styles/variables';
+
+.topbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  border-bottom: 1px solid $border;
+  background: linear-gradient(90deg, rgba($brand, 0.10), rgba($brand2, 0.10));
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 240px;
+}
+
+.logo {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, $brand, $brand2);
+  box-shadow: 0 8px 18px rgba($brand, 0.25);
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+
+  strong {
+    font-size: 14px;
+  }
+
+  span {
+    font-size: 12px;
+    color: $muted;
+    margin-top: 3px;
+  }
+}
+
+.top-actions {
+  margin-left: auto;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.stream-toggle {
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  user-select: none;
+  color: $muted;
+  margin-right: 10px;
+}
+
+.pill {
+  font-size: 12px;
+  color: $muted;
+  border: 1px solid $border;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: #fff;
+
+  &.connected {
+    color: #52c41a;
+    border-color: #b7eb8f;
+    background: #f6ffed;
+  }
+
+  &.disconnected {
+    color: $muted;
+  }
+}
+
+.btn {
+  border: none;
+  background: linear-gradient(135deg, $brand, $brand2);
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 10px;
+  font-size: 12px;
+  cursor: pointer;
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  &:hover:not(:disabled) {
+    opacity: 0.9;
+  }
+}
+
+@media (max-width: $breakpoint-md) {
+  .topbar {
+    padding: 12px 14px;
+    gap: 8px;
+  }
+
+  .brand {
+    min-width: auto;
+    flex: 1;
+  }
+
+  .logo {
+    width: 30px;
+    height: 30px;
+  }
+
+  .title {
+    strong {
+      font-size: 13px;
+    }
+
+    span {
+      font-size: 11px;
+      display: none;
+    }
+  }
+
+  .top-actions {
+    gap: 6px;
+  }
+
+  .stream-toggle {
+    font-size: 11px;
+    margin-right: 4px;
+  }
+
+  .pill {
+    font-size: 11px;
+    padding: 4px 8px;
+  }
+
+  .btn {
+    padding: 6px 10px;
+    font-size: 11px;
+  }
+}

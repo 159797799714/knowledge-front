@@ -1,0 +1,55 @@
+@import './variables';
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  font-family: $font-family;
+  background: radial-gradient(1200px 600px at 20% 0%, rgba($brand, 0.18), transparent 60%),
+    radial-gradient(1000px 500px at 90% 10%, rgba($brand2, 0.18), transparent 55%),
+    $bg;
+  color: $text;
+  overflow-x: hidden;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 18px;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.app-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (max-width: $breakpoint-md) {
+  body {
+    padding: 0;
+    height: 100vh;
+    height: 100dvh;
+  }
+
+  #root {
+    height: 100%;
+    align-items: flex-start;
+  }
+}

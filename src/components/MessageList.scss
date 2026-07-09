@@ -1,0 +1,27 @@
+@import '../styles/variables';
+
+.chat {
+  flex: 1;
+  overflow: auto;
+  padding: 16px 14px 10px;
+  background: linear-gradient(180deg, rgba($brand, 0.05), transparent 40%),
+              linear-gradient(0deg, rgba($brand2, 0.05), transparent 45%);
+}
+
+.dayline {
+  text-align: center;
+  color: $muted;
+  font-size: 12px;
+  margin: 6px 0 14px;
+}
+
+@media (max-width: $breakpoint-md) {
+  .chat {
+    padding: 12px 10px 8px;
+  }
+
+  .dayline {
+    font-size: 11px;
+    margin: 4px 0 10px;
+  }
+}
