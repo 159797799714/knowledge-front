@@ -1,19 +1,19 @@
-@import '../styles/variables';
+@use '../styles/variables';
 
 .app {
   width: 100%;
   max-width: 100%;
   height: min(820px, 95vh);
-  background: $panel;
-  border: 1px solid $border;
+  background: variables.$panel;
+  border: 1px solid variables.$border;
   border-radius: 16px;
-  box-shadow: $shadow;
+  box-shadow: variables.$shadow;
   overflow: hidden;
   display: flex;
   flex-direction: column;
 }
 
-@media (max-width: $breakpoint-md) {
+@media (max-width: variables.$breakpoint-md) {
   .app {
     max-width: 100%;
     height: 100vh;

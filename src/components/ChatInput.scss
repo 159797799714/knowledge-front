@@ -1,7 +1,7 @@
-@import '../styles/variables';
+@use '../styles/variables';
 
 .composer {
-  border-top: 1px solid $border;
+  border-top: 1px solid variables.$border;
   padding: 12px 14px;
   display: flex;
   gap: 10px;
@@ -16,15 +16,15 @@ textarea {
   max-height: 140px;
   padding: 10px 12px;
   border-radius: 12px;
-  border: 1px solid $border;
+  border: 1px solid variables.$border;
   outline: none;
   font-size: 14px;
   line-height: 1.5;
-  font-family: $font-family;
+  font-family: variables.$font-family;
 
   &:focus {
-    border-color: rgba($brand, 0.6);
-    box-shadow: 0 0 0 3px rgba($brand, 0.12);
+    border-color: rgba(variables.$brand, 0.6);
+    box-shadow: 0 0 0 3px rgba(variables.$brand, 0.12);
   }
 
   &:disabled {
@@ -41,7 +41,7 @@ textarea {
   cursor: pointer;
   font-size: 14px;
   color: #fff;
-  background: linear-gradient(135deg, $brand, $brand2);
+  background: linear-gradient(135deg, variables.$brand, variables.$brand2);
 
   &:disabled {
     opacity: 0.6;
@@ -55,21 +55,21 @@ textarea {
 
 .hint {
   padding: 0 14px 12px;
-  color: $muted;
+  color: variables.$muted;
   font-size: 12px;
   background: #fff;
 }
 
 .kbd {
-  font-family: $font-mono;
-  border: 1px solid $border;
+  font-family: variables.$font-mono;
+  border: 1px solid variables.$border;
   padding: 1px 6px;
   border-radius: 6px;
   background: #f7f9fc;
   color: #3b4a5a;
 }
 
-@media (max-width: $breakpoint-md) {
+@media (max-width: variables.$breakpoint-md) {
   .composer {
     padding: 10px 12px;
     gap: 8px;

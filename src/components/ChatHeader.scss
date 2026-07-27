@@ -1,12 +1,12 @@
-@import '../styles/variables';
+@use '../styles/variables';
 
 .topbar {
   display: flex;
   align-items: center;
   gap: 12px;
   padding: 14px 18px;
-  border-bottom: 1px solid $border;
-  background: linear-gradient(90deg, rgba($brand, 0.10), rgba($brand2, 0.10));
+  border-bottom: 1px solid variables.$border;
+  background: linear-gradient(90deg, rgba(variables.$brand, 0.10), rgba(variables.$brand2, 0.10));
 }
 
 .brand {
@@ -20,8 +20,8 @@
   width: 36px;
   height: 36px;
   border-radius: 10px;
-  background: linear-gradient(135deg, $brand, $brand2);
-  box-shadow: 0 8px 18px rgba($brand, 0.25);
+  background: linear-gradient(135deg, variables.$brand, variables.$brand2);
+  box-shadow: 0 8px 18px rgba(variables.$brand, 0.25);
 }
 
 .title {
@@ -35,7 +35,7 @@
 
   span {
     font-size: 12px;
-    color: $muted;
+    color: variables.$muted;
     margin-top: 3px;
   }
 }
@@ -54,14 +54,14 @@
   gap: 4px;
   cursor: pointer;
   user-select: none;
-  color: $muted;
+  color: variables.$muted;
   margin-right: 10px;
 }
 
 .pill {
   font-size: 12px;
-  color: $muted;
-  border: 1px solid $border;
+  color: variables.$muted;
+  border: 1px solid variables.$border;
   padding: 6px 10px;
   border-radius: 999px;
   background: #fff;
@@ -73,13 +73,13 @@
   }
 
   &.disconnected {
-    color: $muted;
+    color: variables.$muted;
   }
 }
 
 .btn {
   border: none;
-  background: linear-gradient(135deg, $brand, $brand2);
+  background: linear-gradient(135deg, variables.$brand, variables.$brand2);
   color: #fff;
   padding: 8px 12px;
   border-radius: 10px;
@@ -96,7 +96,7 @@
   }
 }
 
-@media (max-width: $breakpoint-md) {
+@media (max-width: variables.$breakpoint-md) {
   .topbar {
     padding: 12px 14px;
     gap: 8px;

@@ -44,11 +44,11 @@ export const apiLogin = async (username: string, password: string): Promise<Logi
   return await response.json();
 };
 
-export const apiRegister = async (username: string): Promise<RegisterResponse> => {
+export const apiRegister = async (username: string, password: string): Promise<RegisterResponse> => {
   const response = await fetch(`${API_BASE}/register`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ username }),
+    body: JSON.stringify({ username, password }),
   });
 
   if (!response.ok) {

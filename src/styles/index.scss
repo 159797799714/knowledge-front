@@ -1,4 +1,4 @@
-@import './variables';
+@use 'variables';
 
 * {
   box-sizing: border-box;
@@ -10,11 +10,11 @@ body {
   padding: 0;
   width: 100%;
   height: 100%;
-  font-family: $font-family;
-  background: radial-gradient(1200px 600px at 20% 0%, rgba($brand, 0.18), transparent 60%),
-    radial-gradient(1000px 500px at 90% 10%, rgba($brand2, 0.18), transparent 55%),
-    $bg;
-  color: $text;
+  font-family: variables.$font-family;
+  background: radial-gradient(1200px 600px at 20% 0%, rgba(variables.$brand, 0.18), transparent 60%),
+    radial-gradient(1000px 500px at 90% 10%, rgba(variables.$brand2, 0.18), transparent 55%),
+    variables.$bg;
+  color: variables.$text;
   overflow-x: hidden;
 }
 
@@ -41,7 +41,7 @@ body {
   align-items: center;
 }
 
-@media (max-width: $breakpoint-md) {
+@media (max-width: variables.$breakpoint-md) {
   body {
     padding: 0;
     height: 100vh;
