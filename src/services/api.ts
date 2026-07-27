@@ -1,4 +1,5 @@
 import { QueryResponse, HistoryItem } from '../types';
+import { message } from 'antd';
 
 const API_BASE = 'http://119.29.206.59/knowledge/queryApi';
 
@@ -15,6 +16,47 @@ const createAuthHeaders = (): HeadersInit => {
     headers['Authorization'] = `Bearer ${token}`;
   }
   return headers;
+};
+
+// 统一处理HTTP响应状态码
+let redirectTimer: NodeJS.Timeout | null = null;
+
+const handleResponse = async (response: Response): Promise<any> => {
+  // 401未授权，重定向到登录页面
+  if (response.status === 401) {
+    localStorage.removeItem('token');
+
+    // 清除之前的定时器（如果存在）
+    if (redirectTimer) {
+      clearTimeout(redirectTimer);
+      // 显示toast提示（持续1.5秒，比重定向时间短）
+      message.warning('认证已过期，即将跳转到登录页面...', 1.5);
+
+    }
+
+    // 延迟2秒后重定向
+    redirectTimer = setTimeout(() => {
+      console.log('执行401重定向到/login');
+      window.location.href = '/login';
+      redirectTimer = null;
+    }, 2000);
+
+    throw new Error('认证已过期，请重新登录');
+  }
+
+  // 其他错误状态码
+  if (!response.ok) {
+    const errorText = await response.text();
+    throw new Error(errorText || `请求失败 (${response.status})`);
+  }
+
+  // 成功响应，尝试解析JSON
+  try {
+    return await response.json();
+  } catch {
+    debugger
+    return null;
+  }
 };
 
 export interface LoginResponse {
@@ -36,12 +78,7 @@ export const apiLogin = async (username: string, password: string): Promise<Logi
     body: JSON.stringify({ username, password }),
   });
 
-  if (!response.ok) {
-    const errorText = await response.text();
-    throw new Error(errorText || '登录失败');
-  }
-
-  return await response.json();
+  return await handleResponse(response);
 };
 
 export const apiRegister = async (username: string, password: string): Promise<RegisterResponse> => {
@@ -51,12 +88,7 @@ export const apiRegister = async (username: string, password: string): Promise<R
     body: JSON.stringify({ username, password }),
   });
 
-  if (!response.ok) {
-    const errorText = await response.text();
-    throw new Error(errorText || '注册失败');
-  }
-
-  return await response.json();
+  return await handleResponse(response);
 };
 
 export const checkHealth = async (): Promise<boolean> => {
@@ -83,12 +115,7 @@ export const sendQuery = async (
     }),
   });
 
-  if (!response.ok) {
-    const errorText = await response.text();
-    throw new Error(errorText || '请求失败');
-  }
-
-  return await response.json();
+  return await handleResponse(response);
 };
 
 export const getHistory = async (sessionId: string): Promise<HistoryItem[]> => {
@@ -96,11 +123,10 @@ export const getHistory = async (sessionId: string): Promise<HistoryItem[]> => {
     const response = await fetch(`${API_BASE}/history/${sessionId}`, {
       headers: createAuthHeaders(),
     });
-    if (!response.ok) {
-      return [];
-    }
-    const data = await response.json();
-    return Array.isArray(data.items) ? data.items : [];
+    
+    // 401已经在handleResponse中处理，会抛出异常
+    const data = await handleResponse(response);
+    return Array.isArray(data?.items) ? data.items : [];
   } catch (error) {
     console.error('Failed to fetch history:', error);
     return [];
@@ -113,7 +139,10 @@ export const clearHistory = async (sessionId: string): Promise<boolean> => {
       method: 'DELETE',
       headers: createAuthHeaders(),
     });
-    return response.ok;
+    
+    // 401已经在handleResponse中处理
+    await handleResponse(response);
+    return true;
   } catch (error) {
     console.error('Failed to clear history:', error);
     return false;
