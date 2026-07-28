@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { List, Empty, Button } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../store/store';
+import { createNewSession } from '../store/chatSlice';
 
 interface SessionInfo {
   id: string;
@@ -11,11 +12,13 @@ interface SessionInfo {
   timestamp: number;
 }
 
-const Sidebar: React.FC = () => {
+const Sidebar: React.FC<{ onClose: () => void }> = ({ onClose }) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { sessionId: routeSessionId } = useParams<{ sessionId: string }>();
   const { sessionId } = useSelector((state: RootState) => state.chat);
   const [sessions, setSessions] = useState<SessionInfo[]>([]);
+  const [prevSessionId, setPrevSessionId] = useState<string>(sessionId);
 
   useEffect(() => {
     // TODO: 实际项目中需要从API获取会话列表
@@ -34,12 +37,24 @@ const Sidebar: React.FC = () => {
     }
   }, [routeSessionId, sessionId]);
 
+  // 监听 sessionId 变化，当创建新会话时自动导航
+  useEffect(() => {
+    if (sessionId && sessionId !== prevSessionId && prevSessionId) {
+      // sessionId 发生变化且不是初始化，说明创建了 new session
+      navigate(`/chat/${sessionId}`);
+    }
+    setPrevSessionId(sessionId);
+  }, [sessionId, prevSessionId, navigate]);
+
   const handleSessionClick = (id: string) => {
     navigate(`/chat/${id}`);
   };
 
   const handleNewChat = () => {
-    navigate('/chat/new');
+    // 直接创建新会话，会生成新的 sessionId
+    // sessionId 变化会自动触发上面的 useEffect 进行导航
+    onClose();
+    dispatch(createNewSession());
   };
 
   return (

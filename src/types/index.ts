@@ -41,3 +41,16 @@ export interface HistoryItem {
   ts?: number;
   image_urls?: string[];
 }
+
+// 会话项
+export interface SessionItem {
+  session_id: string;
+  last_ts?: number;
+  message_count?: number;
+}
+
+// 会话列表响应
+export interface SessionListResponse {
+  sessions: SessionItem[];
+  total: number;
+}

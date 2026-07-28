@@ -89,7 +89,7 @@ const Layout: React.FC = () => {
           onClick={handleMenuClick}
           style={{ borderRight: 0 }}
         />
-        <Sidebar />
+        <Sidebar onClose={() => setDrawerOpen(false)}/>
       </Drawer>
     </AntLayout>
   );

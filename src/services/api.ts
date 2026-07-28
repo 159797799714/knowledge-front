@@ -1,4 +1,4 @@
-import { QueryResponse, HistoryItem } from '../types';
+import { QueryResponse, HistoryItem, SessionItem, SessionListResponse } from '../types';
 import { message } from 'antd';
 
 const API_BASE = 'http://119.29.206.59/knowledge/queryApi';
@@ -25,6 +25,8 @@ const handleResponse = async (response: Response): Promise<any> => {
   // 401未授权，重定向到登录页面
   if (response.status === 401) {
     localStorage.removeItem('token');
+    localStorage.removeItem('kb_session_id');
+    localStorage.removeItem('username');
 
     // 清除之前的定时器（如果存在）
     if (redirectTimer) {
@@ -146,6 +148,24 @@ export const clearHistory = async (sessionId: string): Promise<boolean> => {
   } catch (error) {
     console.error('Failed to clear history:', error);
     return false;
+  }
+};
+
+export const getSessionList = async (limit: number = 100): Promise<SessionListResponse> => {
+  try {
+    const response = await fetch(`${API_BASE}/sessions?limit=${limit}`, {
+      headers: createAuthHeaders(),
+    });
+    
+    // 401已经在handleResponse中处理，会抛出异常
+    const data = await handleResponse(response);
+    return {
+      sessions: Array.isArray(data?.sessions) ? data.sessions : [],
+      total: data?.total || 0,
+    };
+  } catch (error) {
+    console.error('Failed to fetch session list:', error);
+    return { sessions: [], total: 0 };
   }
 };
 
