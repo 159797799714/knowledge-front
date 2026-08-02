@@ -21,24 +21,25 @@
 
 ```
 App (根组件)
-└── ChatContainer (主容器)
-    ├── ChatHeader (顶部栏)
-    │   ├── Logo & Title
-    │   ├── Stream Toggle
-    │   ├── API Status
-    │   └── Clear Button
-    ├── MessageList (消息列表)
-    │   └── MessageItem (单条消息) × N
-    │       ├── Avatar (头像)
-    │       ├── Bubble (气泡)
-    │       │   ├── Typing Indicator
-    │       │   ├── Answer Text
-    │       │   ├── Progress Details
-    │       │   └── Images
-    │       └── Meta (时间戳)
-    └── ChatInput (输入框)
-        ├── Textarea
-        └── Send Button
+└── Layout (布局容器)
+    └── ChatPage (聊天主页面，路由加载)
+        ├── ChatHeader (顶部栏)
+        │   ├── Logo & Title
+        │   ├── Stream Toggle
+        │   ├── API Status
+        │   └── Clear Button
+        ├── MessageList (消息列表)
+        │   └── MessageItem (单条消息) × N
+        │       ├── Avatar (头像)
+        │       ├── Bubble (气泡)
+        │       │   ├── Typing Indicator
+        │       │   ├── Answer Text
+        │       │   ├── Progress Details
+        │       │   └── Images
+        │       └── Meta (时间戳)
+        └── ChatInput (输入框)
+            ├── Textarea
+            └── Send Button
 ```
 
 ### 3. 数据流向
@@ -57,7 +58,7 @@ API调用 → Response → Dispatch Action → State更新
 - `.scss` - 组件样式
 
 **职责分离**：
-- `ChatContainer.tsx`: 协调子组件，处理生命周期（API检查、历史加载）
+- `ChatPage.tsx` (pages/): 页面级容器，协调子组件，处理生命周期（API检查、历史加载）
 - `ChatHeader.tsx`: 顶部控制栏（流式切换、清空对话）
 - `MessageList.tsx`: 消息列表容器，自动滚动
 - `MessageItem.tsx`: 单条消息渲染（支持文本、图片、进度）

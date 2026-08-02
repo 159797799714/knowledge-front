@@ -6,27 +6,20 @@
 
 ---
 
-## 1. ChatContainer - 主容器组件
+## 1. ChatPage - 聊天主页面
 
-**位置**: `src/components/ChatContainer.tsx`
+**位置**: `src/pages/ChatPage.tsx`
 
 **职责**: 
 - 协调所有子组件
 - 管理生命周期（API检查、历史加载）
 - 提供整体布局
 
-**使用示例**:
-```tsx
-import { ChatContainer } from './components';
-
-function App() {
-  return <ChatContainer />;
-}
-```
+**使用方式**: 由路由 `chat/:sessionId` 加载，无 props。
 
 **特点**:
 - 自动检查API连接状态（每5秒）
-- 自动加载会话历史记录
+- 根据路由参数自动加载会话历史记录
 - 包含完整的聊天界面
 
 ---

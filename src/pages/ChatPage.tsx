@@ -7,7 +7,7 @@ import { Message } from '../types';
 import ChatHeader from '../components/ChatHeader';
 import MessageList from '../components/MessageList';
 import ChatInput from '../components/ChatInput';
-import '../components/ChatContainer.scss';
+import './ChatPage.scss';
 
 const ChatPage: React.FC = () => {
   const { sessionId: routeSessionId } = useParams<{ sessionId: string }>();
@@ -19,10 +19,37 @@ const ChatPage: React.FC = () => {
       dispatch(setApiConnected(isConnected));
     };
 
-    checkApiHealth();
-    const interval = setInterval(checkApiHealth, 5000);
+    let intervalId: ReturnType<typeof setInterval>;
 
-    return () => clearInterval(interval);
+    const startPolling = () => {
+      checkApiHealth(); // 立即执行一次
+      intervalId = setInterval(checkApiHealth, 5000);
+    };
+
+    const stopPolling = () => {
+      if (intervalId) {
+        clearInterval(intervalId);
+      }
+    };
+
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === 'visible') {
+        startPolling();
+      } else {
+        stopPolling();
+      }
+    };
+
+    // 初始启动
+    startPolling();
+
+    // 监听可见性变化
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+
+    return () => {
+      stopPolling();
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+    };
   }, [dispatch]);
 
   useEffect(() => {

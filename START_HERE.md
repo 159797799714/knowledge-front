@@ -17,12 +17,13 @@ chat-react/
 │   └── .gitignore
 │
 ├── 📁 src/ (核心代码)
-│   ├── components/ (5个组件 + 5个样式)
-│   │   ├── ChatContainer.tsx/.scss
+│   ├── components/ (4个组件 + 4个样式)
 │   │   ├── ChatHeader.tsx/.scss
 │   │   ├── MessageList.tsx/.scss
 │   │   ├── MessageItem.tsx/.scss
 │   │   └── ChatInput.tsx/.scss
+│   ├── pages/ (页面组件)
+│   │   └── ChatPage.tsx/.scss
 │   ├── store/ (Redux状态管理)
 │   │   ├── store.ts
 │   │   └── chatSlice.ts

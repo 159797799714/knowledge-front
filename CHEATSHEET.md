@@ -146,9 +146,9 @@ const { text, images } = parseAnswerAndImages(answerText);
 
 ## 🧩 组件Props
 
-### ChatContainer
+### ChatPage
 ```tsx
-<ChatContainer />  // 无props，从Redux获取状态
+// 由路由 chat/:sessionId 加载，无 props，从Redux获取状态
 ```
 
 ### MessageItem

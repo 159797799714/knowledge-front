@@ -1,4 +1,3 @@
-export { default as ChatContainer } from './ChatContainer';
 export { default as ChatHeader } from './ChatHeader';
 export { default as MessageList } from './MessageList';
 export { default as MessageItem } from './MessageItem';

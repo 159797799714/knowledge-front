@@ -16,11 +16,13 @@
 chat-react/
 ├── src/
 │   ├── components/          # React组件
-│   │   ├── ChatContainer.tsx    # 主容器组件
 │   │   ├── ChatHeader.tsx       # 顶部栏组件
 │   │   ├── MessageList.tsx      # 消息列表组件
 │   │   ├── MessageItem.tsx      # 单条消息组件
 │   │   └── ChatInput.tsx        # 输入框组件
+│   ├── pages/                # 页面组件
+│   │   ├── ChatPage.tsx         # 聊天主页面（含 ChatPage.scss）
+│   │   └── LoginPage.tsx        # 登录页面
 │   ├── store/               # Redux状态管理
 │   │   ├── store.ts         # Store配置
 │   │   └── chatSlice.ts     # 聊天状态切片
