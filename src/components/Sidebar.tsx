@@ -8,7 +8,7 @@ import { createNewSession } from '../store/chatSlice';
 import { getSessionList } from '../services/api';
 import { SessionItem } from '../types';
 
-const Sidebar: React.FC<{ onClose: () => void }> = ({ onClose }) => {
+const Sidebar: React.FC<{ onClose?: () => void }> = ({ onClose }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { sessionId } = useSelector((state: RootState) => state.chat);
@@ -59,7 +59,7 @@ const Sidebar: React.FC<{ onClose: () => void }> = ({ onClose }) => {
   const handleNewChat = () => {
     // 直接创建新会话，会生成新的 sessionId
     // sessionId 变化会自动触发上面的 useEffect 进行导航
-    onClose();
+    onClose?.();
     dispatch(createNewSession());
   };
 

@@ -1,4 +1,4 @@
-import { QueryResponse, HistoryItem, SessionItem, SessionListResponse } from '../types';
+import { QueryResponse, HistoryItem, SessionListResponse } from '../types';
 import { message } from 'antd';
 
 const API_BASE = 'http://119.29.206.59/knowledge/queryApi';
