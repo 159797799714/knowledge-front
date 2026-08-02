@@ -24,7 +24,7 @@ const initialState: ChatState = {
     {
       id: 'welcome',
       role: 'bot',
-      text: '你好，我是掌柜智库知识库客服。你可以直接提问，我会在"阶段进度"里展示处理过程。',
+      text: '你好，我是你的专属智能知识库客服。你可以直接提问，我会尽力帮助你。',
       timestamp: Date.now(),
     },
   ],
