@@ -39,7 +39,7 @@ const handleResponse = async (response: Response): Promise<any> => {
     // 延迟2秒后重定向
     redirectTimer = setTimeout(() => {
       console.log('执行401重定向到/login');
-      window.location.href = '/login';
+      window.location.hash = '#/login';
       redirectTimer = null;
     }, 2000);
 
