@@ -16,13 +16,6 @@
   min-width: 240px;
 }
 
-.logo {
-  width: 36px;
-  height: 36px;
-  border-radius: 10px;
-  background: linear-gradient(135deg, variables.$brand, variables.$brand2);
-  box-shadow: 0 8px 18px rgba(variables.$brand, 0.25);
-}
 
 .title {
   display: flex;
@@ -107,10 +100,6 @@
     flex: 1;
   }
 
-  .logo {
-    width: 30px;
-    height: 30px;
-  }
 
   .title {
     strong {

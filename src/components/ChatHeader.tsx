@@ -27,7 +27,6 @@ const ChatHeader: React.FC = () => {
   return (
     <div className="topbar">
       <div className="brand">
-        <div className="logo"></div>
         <div className="title">
           <strong>智能知识库</strong>
           <span>在线 · 可查询知识库与联网信息</span>
